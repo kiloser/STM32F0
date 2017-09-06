@@ -5,11 +5,11 @@
 <h2>Tool Versions:</h2>
 IDE-Version: μVision V5.14.0.0
 Copyright (C) 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: llll Administrator, 111, LIC=AK1VE-54VWF-X9KG0-BEHNZ-G89H9-CXFG5
+License Information: pi Microsoft, Microsoft, LIC=Y2BKP-M8X7S-QF0IY-I9F2K-3ATNX-YDDUH
  
 Tool Versions:
 Toolchain:       MDK-ARM Professional  Version: 5.14.0.0
-Toolchain Path:  D:\keilmdk\ARM\ARMCC\Bin
+Toolchain Path:  D:\Keil_v5\ARM\ARMCC\Bin
 C Compiler:      Armcc.exe V5.05 update 1 (build 106)
 Assembler:       Armasm.exe V5.05 update 1 (build 106)
 Linker/Locator:  ArmLink.exe V5.05 update 1 (build 106)
@@ -21,7 +21,7 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.14.0_KEIL
 Dialog DLL:      TARMCM1.DLL V1.9.0.0
  
 <h2>Project:</h2>
-E:\研一\定位·\201708018\tag\tag01\MDK-ARM\f072cbt6.uvprojx
+F:\研一\定位\20170906\tag\tag01\MDK-ARM\f072cbt6.uvprojx
 Project File Date:  06/28/2017
 
 <h2>Output:</h2>
@@ -49,22 +49,22 @@ assembling startup_stm32f072xb.s...
 compiling stm32f0xx_it.c...
 ..\Drivers\Hardware\USART\USART.h(17): warning:  #1-D: last line of file ends without a newline
   #endif
-../Src/stm32f0xx_it.c(154): warning:  #177-D: variable "p" was declared but never referenced
+../Src/stm32f0xx_it.c(168): warning:  #177-D: variable "p" was declared but never referenced
         char *p;
 ../Src/stm32f0xx_it.c: 2 warnings, 0 errors
 compiling stm32f0xx_hal_msp.c...
 compiling main.c...
 ..\Drivers\Hardware\USART\USART.h(17): warning:  #1-D: last line of file ends without a newline
   #endif
-../Src/main.c(350): warning:  #1293-D: assignment in condition
+../Src/main.c(344): warning:  #1293-D: assignment in condition
                                                 while (!(status_reg=dwt_read32bitreg(SYS_STATUS_ID) & SYS_STATUS_TXFRS))
-../Src/main.c(364): warning:  #1293-D: assignment in condition
+../Src/main.c(358): warning:  #1293-D: assignment in condition
                                                 while (!(status_reg=dwt_read32bitreg(SYS_STATUS_ID) & SYS_STATUS_TXFRS))
-../Src/main.c(53): warning:  #550-D: variable "status_reg" was set but never used
+../Src/main.c(55): warning:  #550-D: variable "status_reg" was set but never used
   static uint32 status_reg = 0; 
-../Src/main.c(76): warning:  #177-D: variable "online_tx_ts" was declared but never referenced
+../Src/main.c(78): warning:  #177-D: variable "online_tx_ts" was declared but never referenced
   static uint64 online_tx_ts;
-../Src/main.c(77): warning:  #177-D: variable "tag_order" was declared but never referenced
+../Src/main.c(79): warning:  #177-D: variable "tag_order" was declared but never referenced
   static uint32 tag_order=1;
 ../Src/main.c: 6 warnings, 0 errors
 compiling Testing.c...
@@ -106,7 +106,7 @@ compiling usmart_config.c...
 ..\Drivers\Hardware\USAMRT\usmart_config.c: 1 warning, 0 errors
 compiling usmart_str.c...
 linking...
-Program Size: Code=23224 RO-data=584 RW-data=476 ZI-data=2076  
+Program Size: Code=23404 RO-data=584 RW-data=476 ZI-data=2140  
 "f072cbt6\f072cbt6.axf" - 0 Error(s), 18 Warning(s).
 
 <h2>Software Packages used:</h2>
@@ -118,9 +118,9 @@ Package Vendor: ARM
    * Component: CORE Version: 3.40.0
 
 <h2>Collection of Component include folders:</h2>
-  E:\研一\定位·\201708018\tag\tag01\MDK-ARM\RTE
-  D:\keilmdk\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include
-  D:\keilmdk\ARM\PACK\Keil\STM32F0xx_DFP\1.5.0
+  F:\研一\定位\20170906\tag\tag01\MDK-ARM\RTE
+  D:\Keil_v5\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include
+  D:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\1.5.0
 
 <h2>Collection of Component Files used:</h2>
 

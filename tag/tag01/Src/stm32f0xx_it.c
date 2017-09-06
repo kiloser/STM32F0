@@ -47,6 +47,7 @@ extern usart_bitfield USART_STA;
 
 /* External variables --------------------------------------------------------*/
 extern TIM_HandleTypeDef htim14;
+extern TIM_HandleTypeDef htim16;
 
 /* USER CODE END 0 */
 
@@ -143,6 +144,19 @@ void TIM14_IRQHandler(void)
   HAL_TIM_IRQHandler(&htim14);
   /* USER CODE BEGIN TIM14_IRQn 1 */
 	
+
+}
+
+void TIM16_IRQHandler(void)
+{
+	
+	 if(__HAL_TIM_GET_IT_SOURCE(&htim16, TIM_IT_UPDATE) !=RESET)
+    {
+      __HAL_TIM_CLEAR_IT(&htim16, TIM_IT_UPDATE);
+			
+			printf("nice0\r\n");
+			
+    }
 
 }
 		

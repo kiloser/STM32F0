@@ -179,6 +179,14 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
 		HAL_NVIC_SetPriority(TIM14_IRQn, 2, 0);
   /* USER CODE END TIM14_MspInit 1 */
   }
+	
+	if(htim_base->Instance==TIM16)
+  {
+    __HAL_RCC_TIM16_CLK_ENABLE();
+
+    HAL_NVIC_EnableIRQ(TIM16_IRQn);
+		HAL_NVIC_SetPriority(TIM16_IRQn, 2, 0);
+  }
 
 }
 

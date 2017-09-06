@@ -203,13 +203,7 @@ int main(void)
 	while (1)
 		{
 			
-//			if(syncstart==1)
-//				{
-//					syncstart=0;
-//					dwt_forcetrxoff();
-//					send_sync();				
-//				}
-				/* Clear reception timeout to start next ranging process. */
+
 				dwt_rxreset();
 				dwt_setrxtimeout(0);
 				/* Activate reception immediately. */

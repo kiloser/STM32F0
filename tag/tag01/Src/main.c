@@ -12,6 +12,7 @@ SPI_HandleTypeDef hspi1;
 SPI_HandleTypeDef hspi2;
 
 TIM_HandleTypeDef htim14;
+TIM_HandleTypeDef htim16;
 
 UART_HandleTypeDef huart1;
 //#define NEW
@@ -40,6 +41,7 @@ static void MX_USART1_UART_Init(void);
 static void MX_SPI2_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_TIM14_Init(void);
+static void MX_TIM16_Init(void);
 
 static uint8 tag_id[2] ={0x00,0x04};
 static uint16 tag_delay=450;
@@ -127,6 +129,7 @@ int main(void)
   MX_SPI2_Init();
   MX_SPI1_Init();
 	MX_TIM14_Init();
+	MX_TIM16_Init();
 	
 #ifdef	FLASHPROTECT
 	HAL_FLASH_Unlock();
@@ -141,6 +144,7 @@ int main(void)
 #endif
 
   HAL_TIM_Base_Start_IT(&htim14);
+	HAL_TIM_Base_Start_IT(&htim16);
 	delay_init();
 	usmart_init(48);//in this case, parameter is useless
 	HAL_UART_Receive_IT(&huart1, usart_rx_buff, 64);
@@ -585,6 +589,20 @@ static void MX_TIM14_Init(void)
 
 }
 
+static void MX_TIM16_Init(void)
+{
+
+  htim16.Instance = TIM16;
+  htim16.Init.Prescaler = 4799;
+  htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim16.Init.Period = 50000;//1ms ÷–∂œ“ª¥Œ
+  htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  if (HAL_TIM_Base_Init(&htim16) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+}
 
 /* USART1 init function */
 static void MX_USART1_UART_Init(void)

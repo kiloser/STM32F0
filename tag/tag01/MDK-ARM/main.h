@@ -43,6 +43,7 @@ extern uint32 localtime;
 extern uint16 startCnt;
 extern uint16 cnta;
 extern TIM_HandleTypeDef htim14;
+extern TIM_HandleTypeDef htim16;
 extern UART_HandleTypeDef huart1;
 extern char newdata;
 extern uint8 startFlag;
