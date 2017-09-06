@@ -1,0 +1,131 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: μVision V5.14.0.0
+Copyright (C) 2015 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: llll Administrator, 111, LIC=AK1VE-54VWF-X9KG0-BEHNZ-G89H9-CXFG5
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Professional  Version: 5.14.0.0
+Toolchain Path:  D:\keilmdk\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.05 update 1 (build 106)
+Assembler:       Armasm.exe V5.05 update 1 (build 106)
+Linker/Locator:  ArmLink.exe V5.05 update 1 (build 106)
+Library Manager: ArmAr.exe V5.05 update 1 (build 106)
+Hex Converter:   FromElf.exe V5.05 update 1 (build 106)
+CPU DLL:         SARMCM3.DLL V5.14.0.0
+Dialog DLL:      DARMCM1.DLL V1.12.0.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.14.0_KEIL
+Dialog DLL:      TARMCM1.DLL V1.9.0.0
+ 
+<h2>Project:</h2>
+E:\研一\定位·\201708018\tag\tag01\MDK-ARM\f072cbt6.uvprojx
+Project File Date:  06/28/2017
+
+<h2>Output:</h2>
+Rebuild target 'f072cbt6'
+compiling stm32f0xx_hal_tim.c...
+compiling stm32f0xx_hal_dma.c...
+compiling stm32f0xx_hal_flash.c...
+compiling stm32f0xx_hal_i2c_ex.c...
+compiling stm32f0xx_hal_uart.c...
+compiling stm32f0xx_hal_i2c.c...
+compiling stm32f0xx_hal_pwr_ex.c...
+compiling stm32f0xx_hal_gpio.c...
+compiling stm32f0xx_hal_rcc_ex.c...
+compiling stm32f0xx_hal_rcc.c...
+compiling stm32f0xx_hal_uart_ex.c...
+compiling stm32f0xx_hal.c...
+compiling stm32f0xx_hal_flash_ex.c...
+compiling stm32f0xx_hal_tim_ex.c...
+compiling stm32f0xx_hal_pwr.c...
+compiling stm32f0xx_hal_cortex.c...
+compiling stm32f0xx_hal_spi.c...
+compiling stm32f0xx_hal_spi_ex.c...
+compiling system_stm32f0xx.c...
+assembling startup_stm32f072xb.s...
+compiling stm32f0xx_it.c...
+..\Drivers\Hardware\USART\USART.h(17): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Src/stm32f0xx_it.c(154): warning:  #177-D: variable "p" was declared but never referenced
+        char *p;
+../Src/stm32f0xx_it.c: 2 warnings, 0 errors
+compiling stm32f0xx_hal_msp.c...
+compiling main.c...
+..\Drivers\Hardware\USART\USART.h(17): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Src/main.c(350): warning:  #1293-D: assignment in condition
+                                                while (!(status_reg=dwt_read32bitreg(SYS_STATUS_ID) & SYS_STATUS_TXFRS))
+../Src/main.c(364): warning:  #1293-D: assignment in condition
+                                                while (!(status_reg=dwt_read32bitreg(SYS_STATUS_ID) & SYS_STATUS_TXFRS))
+../Src/main.c(53): warning:  #550-D: variable "status_reg" was set but never used
+  static uint32 status_reg = 0; 
+../Src/main.c(76): warning:  #177-D: variable "online_tx_ts" was declared but never referenced
+  static uint64 online_tx_ts;
+../Src/main.c(77): warning:  #177-D: variable "tag_order" was declared but never referenced
+  static uint32 tag_order=1;
+../Src/main.c: 6 warnings, 0 errors
+compiling Testing.c...
+..\Drivers\Hardware\USART\USART.h(17): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Src\Testing.c: 1 warning, 0 errors
+compiling delay.c...
+..\Drivers\Hardware\USART\USART.h(17): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Src\delay.c: 1 warning, 0 errors
+compiling deca_callback.c...
+compiling deca_mutex.c...
+compiling deca_sleep.c...
+compiling deca_spi.c...
+compiling dw1000.c...
+..\Drivers\Hardware\Platform_deca\dw1000.c(39): warning:  #177-D: variable "headbuff" was declared but never referenced
+        uint8 headbuff[1]={0x00};
+..\Drivers\Hardware\Platform_deca\dw1000.c(40): warning:  #177-D: variable "headlength" was declared but never referenced
+        uint8 headlength=1;
+..\Drivers\Hardware\Platform_deca\dw1000.c(56): warning:  #177-D: variable "headbuff" was declared but never referenced
+        uint8 headbuff[1]={0x0f};
+..\Drivers\Hardware\Platform_deca\dw1000.c(57): warning:  #177-D: variable "headlength" was declared but never referenced
+        uint8 headlength=1;
+..\Drivers\Hardware\Platform_deca\dw1000.c: 4 warnings, 0 errors
+compiling deca_device.c...
+..\Drivers\Hardware\decadriver\deca_device.c(1360): warning:  #68-D: integer conversion resulted in a change of sign
+          return DWT_ERROR;
+..\Drivers\Hardware\decadriver\deca_device.c(1493): warning:  #68-D: integer conversion resulted in a change of sign
+          return DWT_ERROR;
+..\Drivers\Hardware\decadriver\deca_device.c: 2 warnings, 0 errors
+compiling deca_params_init.c...
+compiling usmart.c...
+..\Drivers\Hardware\USART\USART.h(17): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Drivers\Hardware\USAMRT\usmart.c: 1 warning, 0 errors
+compiling usmart_config.c...
+..\Drivers\Hardware\USART\USART.h(17): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Drivers\Hardware\USAMRT\usmart_config.c: 1 warning, 0 errors
+compiling usmart_str.c...
+linking...
+Program Size: Code=23224 RO-data=584 RW-data=476 ZI-data=2076  
+"f072cbt6\f072cbt6.axf" - 0 Error(s), 18 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.4.2.0.pack
+                ARM::CMSIS:CORE:3.40.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 3.40.0
+
+<h2>Collection of Component include folders:</h2>
+  E:\研一\定位·\201708018\tag\tag01\MDK-ARM\RTE
+  D:\keilmdk\ARM\PACK\ARM\CMSIS\4.2.0\CMSIS\Include
+  D:\keilmdk\ARM\PACK\Keil\STM32F0xx_DFP\1.5.0
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:3.40.0
+      Source file:   CMSIS\UserCodeTemplates\ARM\ITM_Retarget.c
+</pre>
+</body>
+</html>
