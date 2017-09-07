@@ -208,7 +208,7 @@ int main(void)
 				dwt_setrxtimeout(0);
 				/* Activate reception immediately. */
 				dwt_rxenable(DWT_START_RX_IMMEDIATE);
-//				IWDG_Feed();
+				IWDG_Feed();
 			  
 				/* Poll for reception of a frame or error/timeout. See NOTE 7 below. */
 				while (!interrupt_triggered)
@@ -331,7 +331,7 @@ int main(void)
 																if(distance<0)
 																	distance=-distance;
 																/* Display */
-																
+																printf("tag_id:%d \t %d \r\n",tag_id[1],msec);
 																while(SEND_ORDER==1)
 																{
 																	
@@ -354,6 +354,7 @@ int main(void)
 																		{																			
 																			memcpy(&distance_recv[received_numble],&rx_buffer[REPORT_MSG_ID_IDX+ID_LEN],sizeof(double));
 																			memcpy(&id_buff[received_numble][0],&rx_buffer[REPORT_MSG_ID_IDX],ID_LEN);
+																			
 																			//printf("DIST from %x%x is:%3.2f m\r\n",rx_buffer[8],rx_buffer[9],distance_recv[received_numble]);
 																			received_numble++;						
 																		}																	
@@ -458,8 +459,8 @@ void send_sync(void)
 void EXTI4_15_IRQHandler(void)
 {
 	
-//	//初始化看门狗，分频系数为64，重载值为1250，溢出时间为2s
-//			IWDG_Init(4,5000);
+	//初始化看门狗，分频系数为64，重载值为1250，溢出时间为2s
+	IWDG_Init(4,10000);
 	if(EXTI_GetITStatus(EXTI_Line12))
 	{
 		EXTI_ClearITPendingBit(EXTI_Line12);
@@ -536,9 +537,9 @@ void send_to_PC(void)
 	for(i=0;i<20;i++)
 	{
 	while(USART_GetFlagStatus(USART1,USART_FLAG_TC)==RESET); 
-   USART_SendData(USART1,(uint8_t)send_pc[i]);
+//   USART_SendData(USART1,(uint8_t)send_pc[i]);
 	}
-	printf("tag_id:%d \t %d \r\n",tag_id[1],msec);
+//	printf("tag_id:%d \t %d \r\n",tag_id[1],msec);
 }
 
 void set_fre(void)
@@ -742,7 +743,7 @@ void send_to_PC_none(void)
 	for(i=0;i<20;i++)
 	{
 	while(USART_GetFlagStatus(USART1,USART_FLAG_TC)==RESET); 
-   USART_SendData(USART1,(uint8_t)send_pc[i]);
+//   USART_SendData(USART1,(uint8_t)send_pc[i]);
 	}
 //	printf("tag_id:%d \t %d \r\n",tag_id[1],msec);
 }

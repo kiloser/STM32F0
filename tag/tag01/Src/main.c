@@ -43,7 +43,7 @@ static void MX_SPI1_Init(void);
 static void MX_TIM14_Init(void);
 static void MX_TIM16_Init(void);
 
-static uint8 tag_id[2] ={0x00,0x04};
+static uint8 tag_id[2] ={0x00,0x03};
 static uint16 tag_delay=450;
 static uint8 tx_poll_msg[] = {0x26, 0x17, 0x26, 0x16, 0x33, 0, 0, 0, 0, 0};
 static uint8 rx_resp_msg[] = {0x26, 0x17, 0x26, 0x16, 0x44, 0, 0, 0, 0, 0, 0, 0};
@@ -189,7 +189,7 @@ lab:		dwt_forcetrxoff();
 			while(1)
 			{
 						
-						printf("enter waiting :\t %ld\r\n",localtime);
+//						printf("enter waiting :\t %ld\r\n",localtime);
 						while(!interrupt_triggered);
 						interrupt_triggered=0;
 						received=0;
@@ -209,7 +209,7 @@ lab:		dwt_forcetrxoff();
 								acTime+=(uint32)(rx_buffer[8]<<24);
 							  
 								HAL_Delay(1000-acTime%1000);
-								HAL_Delay(100*tag_id[1]);
+								HAL_Delay(150*tag_id[1]+10);
 								
 							  HAL_TIM_Base_Start_IT(&htim14);
 								HAL_TIM_Base_Start_IT(&htim16);
@@ -368,12 +368,13 @@ lab:		dwt_forcetrxoff();
 				
 				
 				
-				printf("time :\t %ld\r\n",localtime);
+				
+//				printf("time :\t %ld\r\n",localtime);
 				if(cntx==9)
 				{		
 					while(!flag10s);
 					flag10s=0;
-
+					
 					dwt_setrxtimeout(0);
 					goto lab;
 				}
@@ -381,9 +382,9 @@ lab:		dwt_forcetrxoff();
 				{
 					dwt_entersleep();
 				}
-				
 				while(!cnta);
 				cnta=0;
+				
 					
 			//	dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_SLP2INIT);
 	}
