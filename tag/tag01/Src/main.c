@@ -375,6 +375,9 @@ lab:		dwt_forcetrxoff();
 					while(!flag10s);
 					flag10s=0;
 					
+//					HAL_TIM_Base_Stop_IT(&htim16);
+//					TIM16->CNT=0;
+					
 					dwt_setrxtimeout(0);
 					goto lab;
 				}
@@ -606,7 +609,7 @@ static void MX_TIM16_Init(void)
   htim16.Instance = TIM16;
   htim16.Init.Prescaler = 47990;
   htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim16.Init.Period = 9900;//9.9s中断一次
+  htim16.Init.Period = 10000;//9.9s中断一次
   htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   if (HAL_TIM_Base_Init(&htim16) != HAL_OK)
   {

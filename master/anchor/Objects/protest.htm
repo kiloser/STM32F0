@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\protest.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\protest.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Thu Sep 07 20:04:55 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Thu Sep 07 23:56:05 2017
 <BR><P>
 <H3>Maximum Stack Usage =        372 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -369,22 +369,21 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> usmart_config.o(.data)
 </UL>
-<P><STRONG><a name="[17]"></a>EXTI4_15_IRQHandler</STRONG> (Thumb, 108 bytes, Stack size 8 bytes, main.o(i.EXTI4_15_IRQHandler))
+<P><STRONG><a name="[17]"></a>EXTI4_15_IRQHandler</STRONG> (Thumb, 100 bytes, Stack size 8 bytes, main.o(i.EXTI4_15_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = EXTI4_15_IRQHandler &rArr; dwt_write32bitoffsetreg &rArr; dwt_writetodevice &rArr; writetospi &rArr; decamutexon
 </UL>
-<BR>[Calls]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
-<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
-<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI_GetITStatus
-<LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI_ClearITPendingBit
-<LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Init
+<BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
+<LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
+<LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI_GetITStatus
+<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI_ClearITPendingBit
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f072.o(RESET)
 </UL>
-<P><STRONG><a name="[47]"></a>EXTI_ClearITPendingBit</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f0xx_exti.o(i.EXTI_ClearITPendingBit))
+<P><STRONG><a name="[46]"></a>EXTI_ClearITPendingBit</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f0xx_exti.o(i.EXTI_ClearITPendingBit))
 <BR><BR>[Called By]<UL><LI><a href="#[17]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI4_15_IRQHandler
 </UL>
 
-<P><STRONG><a name="[46]"></a>EXTI_GetITStatus</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f0xx_exti.o(i.EXTI_GetITStatus))
+<P><STRONG><a name="[45]"></a>EXTI_GetITStatus</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f0xx_exti.o(i.EXTI_GetITStatus))
 <BR><BR>[Called By]<UL><LI><a href="#[17]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI4_15_IRQHandler
 </UL>
 
@@ -426,44 +425,44 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f072.o(RESET)
 </UL>
 <P><STRONG><a name="[4f]"></a>IWDG_Enable</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f0xx_iwdg.o(i.IWDG_Enable))
-<BR><BR>[Called By]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Init
+<BR><BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Init
 </UL>
 
-<P><STRONG><a name="[4a]"></a>IWDG_Feed</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, wdg.o(i.IWDG_Feed))
+<P><STRONG><a name="[49]"></a>IWDG_Feed</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, wdg.o(i.IWDG_Feed))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = IWDG_Feed
 </UL>
-<BR>[Calls]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_ReloadCounter
+<BR>[Calls]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_ReloadCounter
 </UL>
 <BR>[Called By]<UL><LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[45]"></a>IWDG_Init</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, wdg.o(i.IWDG_Init))
+<P><STRONG><a name="[4b]"></a>IWDG_Init</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, wdg.o(i.IWDG_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = IWDG_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_WriteAccessCmd
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_SetReload
 <LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_SetPrescaler
-<LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_ReloadCounter
+<LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_ReloadCounter
 <LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Enable
 </UL>
-<BR>[Called By]<UL><LI><a href="#[17]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EXTI4_15_IRQHandler
+<BR>[Called By]<UL><LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[4b]"></a>IWDG_ReloadCounter</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f0xx_iwdg.o(i.IWDG_ReloadCounter))
-<BR><BR>[Called By]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Init
-<LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Feed
+<P><STRONG><a name="[4a]"></a>IWDG_ReloadCounter</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f0xx_iwdg.o(i.IWDG_ReloadCounter))
+<BR><BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Init
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Feed
 </UL>
 
 <P><STRONG><a name="[4d]"></a>IWDG_SetPrescaler</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f0xx_iwdg.o(i.IWDG_SetPrescaler))
-<BR><BR>[Called By]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Init
+<BR><BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Init
 </UL>
 
 <P><STRONG><a name="[4e]"></a>IWDG_SetReload</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f0xx_iwdg.o(i.IWDG_SetReload))
-<BR><BR>[Called By]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Init
+<BR><BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Init
 </UL>
 
 <P><STRONG><a name="[4c]"></a>IWDG_WriteAccessCmd</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f0xx_iwdg.o(i.IWDG_WriteAccessCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Init
+<BR><BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Init
 </UL>
 
 <P><STRONG><a name="[50]"></a>LED_Init</STRONG> (Thumb, 90 bytes, Stack size 16 bytes, led.o(i.LED_Init))
@@ -584,9 +583,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GetITStatus
 <LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ClearITPendingBit
-<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;function_scan
 <LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SetCounter
 <LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SetAutoreload
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;function_scan
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f072.o(RESET)
 </UL>
@@ -842,7 +841,7 @@ Global Symbols
 <P><STRONG><a name="[7d]"></a>_dwt_otpread</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, deca_device.o(i._dwt_otpread))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = _dwt_otpread &rArr; dwt_read32bitoffsetreg &rArr; dwt_readfromdevice &rArr; readfromspi &rArr; decamutexon
 </UL>
-<BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
+<BR>[Calls]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write8bitoffsetreg
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write16bitoffsetreg
 </UL>
@@ -908,7 +907,7 @@ Global Symbols
 <P><STRONG><a name="[8a]"></a>dwt_configure</STRONG> (Thumb, 516 bytes, Stack size 32 bytes, deca_device.o(i.dwt_configure))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = dwt_configure &rArr; _dwt_configlde &rArr; dwt_write8bitoffsetreg &rArr; dwt_writetodevice &rArr; writetospi &rArr; decamutexon
 </UL>
-<BR>[Calls]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
+<BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write8bitoffsetreg
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write16bitoffsetreg
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dwt_configlde
@@ -919,8 +918,8 @@ Global Symbols
 <P><STRONG><a name="[5d]"></a>dwt_forcetrxoff</STRONG> (Thumb, 76 bytes, Stack size 16 bytes, deca_device.o(i.dwt_forcetrxoff))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = dwt_forcetrxoff &rArr; dwt_syncrxbufptrs &rArr; dwt_write8bitoffsetreg &rArr; dwt_writetodevice &rArr; writetospi &rArr; decamutexon
 </UL>
-<BR>[Calls]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
-<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
+<BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
+<LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decamutexon
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decamutexoff
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write8bitoffsetreg
@@ -934,7 +933,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = dwt_initialise &rArr; dwt_softreset &rArr; _dwt_disablesequencing &rArr; dwt_write16bitoffsetreg &rArr; dwt_writetodevice &rArr; writetospi &rArr; decamutexon
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_readdevid
-<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
+<LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write8bitoffsetreg
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write16bitoffsetreg
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_softreset
@@ -956,7 +955,7 @@ Global Symbols
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_initialise
 </UL>
 
-<P><STRONG><a name="[48]"></a>dwt_read32bitoffsetreg</STRONG> (Thumb, 42 bytes, Stack size 24 bytes, deca_device.o(i.dwt_read32bitoffsetreg))
+<P><STRONG><a name="[47]"></a>dwt_read32bitoffsetreg</STRONG> (Thumb, 42 bytes, Stack size 24 bytes, deca_device.o(i.dwt_read32bitoffsetreg))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = dwt_read32bitoffsetreg &rArr; dwt_readfromdevice &rArr; readfromspi &rArr; decamutexon
 </UL>
 <BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_readfromdevice
@@ -985,7 +984,7 @@ Global Symbols
 <P><STRONG><a name="[8d]"></a>dwt_readdevid</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, deca_device.o(i.dwt_readdevid))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = dwt_readdevid &rArr; dwt_read32bitoffsetreg &rArr; dwt_readfromdevice &rArr; readfromspi &rArr; decamutexon
 </UL>
-<BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
+<BR>[Calls]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_test
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_initialise
@@ -999,7 +998,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_readtxtimestamp
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_readrxtimestamp
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_readrxdata
-<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
+<LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read8bitoffsetreg
 <LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read16bitoffsetreg
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dwt_enableclocks
@@ -1052,8 +1051,8 @@ Global Symbols
 <P><STRONG><a name="[97]"></a>dwt_setinterrupt</STRONG> (Thumb, 58 bytes, Stack size 24 bytes, deca_device.o(i.dwt_setinterrupt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = dwt_setinterrupt &rArr; dwt_write32bitoffsetreg &rArr; dwt_writetodevice &rArr; writetospi &rArr; decamutexon
 </UL>
-<BR>[Calls]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
-<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
+<BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
+<LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decamutexon
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decamutexoff
 </UL>
@@ -1063,8 +1062,8 @@ Global Symbols
 <P><STRONG><a name="[98]"></a>dwt_setleds</STRONG> (Thumb, 164 bytes, Stack size 16 bytes, deca_device.o(i.dwt_setleds))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = dwt_setleds &rArr; dwt_write32bitoffsetreg &rArr; dwt_writetodevice &rArr; writetospi &rArr; decamutexon
 </UL>
-<BR>[Calls]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
-<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
+<BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
+<LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
 </UL>
 <BR>[Called By]<UL><LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1154,7 +1153,7 @@ Global Symbols
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dwt_configlde
 </UL>
 
-<P><STRONG><a name="[49]"></a>dwt_write32bitoffsetreg</STRONG> (Thumb, 38 bytes, Stack size 24 bytes, deca_device.o(i.dwt_write32bitoffsetreg))
+<P><STRONG><a name="[48]"></a>dwt_write32bitoffsetreg</STRONG> (Thumb, 38 bytes, Stack size 24 bytes, deca_device.o(i.dwt_write32bitoffsetreg))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = dwt_write32bitoffsetreg &rArr; dwt_writetodevice &rArr; writetospi &rArr; decamutexon
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_writetodevice
@@ -1194,7 +1193,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;writetospi
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_writetxdata
-<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
+<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
 <LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write8bitoffsetreg
 <LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write16bitoffsetreg
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dwt_enableclocks
@@ -1212,7 +1211,7 @@ Global Symbols
 <P><STRONG><a name="[9e]"></a>dwt_writetxfctrl</STRONG> (Thumb, 36 bytes, Stack size 24 bytes, deca_device.o(i.dwt_writetxfctrl))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = dwt_writetxfctrl &rArr; dwt_write32bitoffsetreg &rArr; dwt_writetodevice &rArr; writetospi &rArr; decamutexon
 </UL>
-<BR>[Calls]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
+<BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_sync
 <LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -1255,13 +1254,13 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> usmart_config.o(.data)
 </UL>
-<P><STRONG><a name="[30]"></a>main</STRONG> (Thumb, 1498 bytes, Stack size 64 bytes, main.o(i.main))
+<P><STRONG><a name="[30]"></a>main</STRONG> (Thumb, 1510 bytes, Stack size 64 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 240<LI>Call Chain = main &rArr; send_to_PC &rArr; __aeabi_dmul &rArr; _double_epilogue &rArr; __aeabi_llsr
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timer_init
 <LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_writetxfctrl
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_writetxdata
-<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
+<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_starttx
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_settxantennadelay
 <LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_setrxtimeout
@@ -1270,7 +1269,7 @@ Global Symbols
 <LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_setinterrupt
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_rxreset
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_readrxdata
-<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
+<LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
 <LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_initialise
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_configure
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_init
@@ -1287,7 +1286,8 @@ Global Symbols
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_tx_timestamp_u64
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_rx_timestamp_u64
 <LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;final_msg_get_ts
-<LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Feed
+<LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Init
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IWDG_Feed
 <LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Init
 <LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_rxenable
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decamutexon
@@ -1368,9 +1368,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_writetxfctrl
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_writetxdata
-<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
+<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_write32bitoffsetreg
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_starttx
-<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
+<LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dwt_read32bitoffsetreg
 <LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[20]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM3_IRQHandler
