@@ -1,7 +1,7 @@
 .\objects\timer.o: USER\timer.c
 .\objects\timer.o: .\SYSTEM\stm32f0xx.h
 .\objects\timer.o: .\CORE\core_cm0.h
-.\objects\timer.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\timer.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\timer.o: .\CORE\core_cmInstr.h
 .\objects\timer.o: .\CORE\core_cmFunc.h
 .\objects\timer.o: .\SYSTEM\system_stm32f0xx.h

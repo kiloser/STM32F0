@@ -60,6 +60,7 @@ static uint8 received =0;
 static uint8 RF_timeout=0;
 static uint8 wearing=0;
 uint32 localtime=0;//本地时间 在TIM14中断中每1ms增加1
+uint32 acTime=0;
 uint16 startCnt=0;
 uint16 cnta=0;
 uint8_t usart_rx_buff[64];//串口buff
@@ -143,8 +144,8 @@ int main(void)
 	HAL_FLASH_Lock();
 #endif
 
-  HAL_TIM_Base_Start_IT(&htim14);
-	HAL_TIM_Base_Start_IT(&htim16);
+//  HAL_TIM_Base_Start_IT(&htim14);
+//	HAL_TIM_Base_Start_IT(&htim16);
 	delay_init();
 	usmart_init(48);//in this case, parameter is useless
 	HAL_UART_Receive_IT(&huart1, usart_rx_buff, 64);
@@ -170,67 +171,69 @@ int main(void)
 			
 	dwt_configure(&config);
 	/* Clear reception timeout to start next ranging process. */
-	dw_setARER(1);			
-	dwt_rxreset();
-	dwt_setrxantennadelay(RX_ANT_DLY);
-	dwt_settxantennadelay(TX_ANT_DLY);
-	dwt_setleds(DWT_LEDS_ENABLE);
-	dwt_setrxtimeout(0);
-	dwt_setinterrupt( DWT_INT_RFTO | DWT_INT_RFCG, 1);
-	/* Activate reception immediately. */
-lab:	dwt_forcetrxoff();
-			dwt_rxenable(DWT_START_RX_IMMEDIATE);
+				dw_setARER(1);			
+				dwt_rxreset();
+				dwt_setrxantennadelay(RX_ANT_DLY);
+				dwt_settxantennadelay(TX_ANT_DLY);
+				dwt_setleds(DWT_LEDS_ENABLE);
+				dwt_setrxtimeout(0);
+				dwt_setinterrupt( DWT_INT_RFTO | DWT_INT_RFCG, 1);
+				/* Activate reception immediately. */
+lab:		dwt_forcetrxoff();
+				dwt_setleds(DWT_LEDS_ENABLE);
+				dwt_rxenable(DWT_START_RX_IMMEDIATE);
 			
 			
 			
   
 			while(1)
 			{
+						
 						printf("enter waiting :\t %ld\r\n",localtime);
 						while(!interrupt_triggered);
 						interrupt_triggered=0;
 						received=0;
-				    /* A frame has been received, read it into the local buffer. */
+						/* A frame has been received, read it into the local buffer. */
 						start_frame_len = dwt_read32bitreg(RX_FINFO_ID) & RX_FINFO_RXFLEN_MASK;
 						if (start_frame_len <= RX_BUF_LEN)
-							{
-								dwt_readrxdata(rx_buffer, start_frame_len, 0);
-							}
+						{
+							dwt_readrxdata(rx_buffer, start_frame_len, 0);
+						}
 				
-						if(rx_buffer[0]==0x26&rx_buffer[1]==0x17&rx_buffer[4]==0x88)
+							if(rx_buffer[0]==0x26&rx_buffer[1]==0x17&rx_buffer[4]==0x88)
 							{
-								localtime=0;
-								localtime=rx_buffer[5];
-								localtime+=(uint32)(rx_buffer[6]<<8);
-								localtime+=(uint32)(rx_buffer[7]<<16);
-								localtime+=(uint32)(rx_buffer[8]<<24);
-								cnta=0;
-//								HAL_Delay((tag_order-1)*300);
-								HAL_Delay(tag_delay);
+								acTime=0;
+								acTime=rx_buffer[5];
+								acTime+=(uint32)(rx_buffer[6]<<8);
+								acTime+=(uint32)(rx_buffer[7]<<16);
+								acTime+=(uint32)(rx_buffer[8]<<24);
+							  
+								HAL_Delay(1000-acTime%1000);
+								HAL_Delay(100*tag_id[1]);
 								
-						
-	//						startTime=localtime;//
-
-								startCnt=0;
+							  HAL_TIM_Base_Start_IT(&htim14);
+								HAL_TIM_Base_Start_IT(&htim16);
+								
+								
 								cntx=0;
 								break;
 						
 							}
-						else
+							else
 							{
 								/* Activate reception immediately. */
 								dwt_rxenable(DWT_START_RX_IMMEDIATE);
 							}
-
+						
 			}
 			
 			
 			
 			
-dwt_configuresleep(DWT_PRESRV_SLEEP | DWT_CONFIG, DWT_WAKE_CS |DWT_WAKE_WK| DWT_SLP_EN);
+	dwt_configuresleep(DWT_PRESRV_SLEEP | DWT_CONFIG, DWT_WAKE_CS |DWT_WAKE_WK| DWT_SLP_EN);
 	/**************************************************/		
 	
-				while (1)
+	while (1)
 	{
 		while(dwt_spicswakeup(dummy_buffer, DUMMY_BUFFER_LEN)!=DWT_SUCCESS);
 		wearing=0;
@@ -361,12 +364,11 @@ dwt_configuresleep(DWT_PRESRV_SLEEP | DWT_CONFIG, DWT_WAKE_CS |DWT_WAKE_WK| DWT_
 						/* Clear TXFRS event. */
 						dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_TXFRS);
 				}
-//				printf("final");
-				/* Execute a delay between ranging exchanges. */
 				cntx++;
-				dwt_entersleep();
-				deca_sleep(SLEEP_TIME_MS-startCnt);
-//				printf("time :\t %ld\r\n",localtime);
+				
+				
+				
+				printf("time :\t %ld\r\n",localtime);
 				if(cntx==9)
 				{		
 					while(!flag10s);
@@ -375,6 +377,14 @@ dwt_configuresleep(DWT_PRESRV_SLEEP | DWT_CONFIG, DWT_WAKE_CS |DWT_WAKE_WK| DWT_
 					dwt_setrxtimeout(0);
 					goto lab;
 				}
+				else
+				{
+					dwt_entersleep();
+				}
+				
+				while(!cnta);
+				cnta=0;
+					
 			//	dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_SLP2INIT);
 	}
 	
@@ -580,7 +590,7 @@ static void MX_TIM14_Init(void)
   htim14.Instance = TIM14;
   htim14.Init.Prescaler = 4799;
   htim14.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim14.Init.Period = 10;//1ms 中断一次
+  htim14.Init.Period = 10000;//1ms 中断一次
   htim14.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   if (HAL_TIM_Base_Init(&htim14) != HAL_OK)
   {
@@ -593,9 +603,9 @@ static void MX_TIM16_Init(void)
 {
 
   htim16.Instance = TIM16;
-  htim16.Init.Prescaler = 4799;
+  htim16.Init.Prescaler = 47990;
   htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim16.Init.Period = 50000;//1ms 中断一次
+  htim16.Init.Period = 9900;//9.9s中断一次
   htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   if (HAL_TIM_Base_Init(&htim16) != HAL_OK)
   {

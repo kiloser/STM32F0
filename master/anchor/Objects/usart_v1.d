@@ -3,7 +3,7 @@
 .\objects\usart_v1.o: .\FWlib\inc\stm32f0xx_usart.h
 .\objects\usart_v1.o: .\SYSTEM\stm32f0xx.h
 .\objects\usart_v1.o: .\CORE\core_cm0.h
-.\objects\usart_v1.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\usart_v1.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\usart_v1.o: .\CORE\core_cmInstr.h
 .\objects\usart_v1.o: .\CORE\core_cmFunc.h
 .\objects\usart_v1.o: .\SYSTEM\system_stm32f0xx.h
@@ -32,7 +32,7 @@
 .\objects\usart_v1.o: .\FWlib\inc\stm32f0xx_usart.h
 .\objects\usart_v1.o: .\FWlib\inc\stm32f0xx_wwdg.h
 .\objects\usart_v1.o: .\FWlib\inc\stm32f0xx_misc.h
-.\objects\usart_v1.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\usart_v1.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\usart_v1.o: .\USER\sys.h
 .\objects\usart_v1.o: .\HARDWARE\SPI\spi_v1.h
 .\objects\usart_v1.o: .\USER\Delay\delay.h
@@ -44,7 +44,7 @@
 .\objects\usart_v1.o: .\HARDWARE\decadriver\deca_regs.h
 .\objects\usart_v1.o: .\HARDWARE\decadriver\deca_version.h
 .\objects\usart_v1.o: .\HARDWARE\decadriver\deca_device_api.h
-.\objects\usart_v1.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\string.h
+.\objects\usart_v1.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\usart_v1.o: .\HARDWARE\Platform_deca\deca_callback.h
 .\objects\usart_v1.o: .\USER\rf24l01.h
 .\objects\usart_v1.o: .\USER\node_sync.h

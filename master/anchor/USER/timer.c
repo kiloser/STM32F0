@@ -14,7 +14,7 @@ void timer_init(void)
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE);//使能TIM3时钟
 		
 	TIM_TimeBaseStructure.TIM_Prescaler=48000-1;//预分频;定时器3计数频率=48000000/48000=1000Hz
-	TIM_TimeBaseStructure.TIM_Period=12000;//计数周期（次数）=10000（即10s中断一次）
+	TIM_TimeBaseStructure.TIM_Period=10000;//计数周期（次数）=10000（即10s中断一次）
 	
 	TIM_TimeBaseStructure.TIM_ClockDivision=0;//不进行时钟分频
 	TIM_TimeBaseStructure.TIM_CounterMode=TIM_CounterMode_Up;//向上计数

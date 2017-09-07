@@ -4,7 +4,7 @@
 .\objects\deca_sleep.o: .\USER\sys.h
 .\objects\deca_sleep.o: .\SYSTEM\stm32f0xx.h
 .\objects\deca_sleep.o: .\CORE\core_cm0.h
-.\objects\deca_sleep.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\deca_sleep.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\deca_sleep.o: .\CORE\core_cmInstr.h
 .\objects\deca_sleep.o: .\CORE\core_cmFunc.h
 .\objects\deca_sleep.o: .\SYSTEM\system_stm32f0xx.h
@@ -42,10 +42,10 @@
 .\objects\deca_sleep.o: .\HARDWARE\EXTI\EXTI_v1.h
 .\objects\deca_sleep.o: .\HARDWARE\decadriver\deca_regs.h
 .\objects\deca_sleep.o: .\HARDWARE\decadriver\deca_version.h
-.\objects\deca_sleep.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\string.h
+.\objects\deca_sleep.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\deca_sleep.o: .\HARDWARE\Platform_deca\deca_callback.h
 .\objects\deca_sleep.o: .\USER\rf24l01.h
 .\objects\deca_sleep.o: .\USER\node_sync.h
-.\objects\deca_sleep.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\deca_sleep.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\deca_sleep.o: .\HARDWARE\WDG\wdg.h
 .\objects\deca_sleep.o: .\USER\sys.h

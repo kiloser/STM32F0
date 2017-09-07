@@ -82,12 +82,12 @@
         <Book>
           <Number>0</Number>
           <Title>Data Brief (STM32F072-Discovery)</Title>
-          <Path>D:\keilmdk\ARM\PACK\Keil\STM32F0xx_DFP\1.5.0\Boards/ST/STM32F072-Discovery/Documents/DM00099403.pdf</Path>
+          <Path>D:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\1.5.0\Boards/ST/STM32F072-Discovery/Documents/DM00099403.pdf</Path>
         </Book>
         <Book>
           <Number>1</Number>
           <Title>Schematics (STM32F072-Discovery)</Title>
-          <Path>D:\keilmdk\ARM\PACK\Keil\STM32F0xx_DFP\1.5.0\Boards/ST/STM32F072-Discovery/Documents/MB1076.pdf</Path>
+          <Path>D:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\1.5.0\Boards/ST/STM32F072-Discovery/Documents/MB1076.pdf</Path>
         </Book>
         <Book>
           <Number>2</Number>
@@ -162,24 +162,7 @@
           <Name>-U55FF6F065083535057361387 -I0 -O10446 -S3 -C0 -A0 -N00("ARM CoreSight SW-DP") -D00(0BB11477) -L00(0) -TO18 -TC10000000 -TP21 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO7 -FD20000000 -FC800 -FN1 -FF0STM32F0xx_128.FLM -FS08000000 -FL020000 -FP0($$Device:STM32F072CB$Flash\STM32F0xx_128.FLM)</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint>
-        <Bp>
-          <Number>0</Number>
-          <Type>0</Type>
-          <LineNumber>185</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134235210</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>E:\鐮斾竴\瀹氫綅路\201708018\tag\tag01\Src\main.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\f072cbt6\../Src/main.c\185</Expression>
-        </Bp>
-      </Breakpoint>
+      <Breakpoint/>
       <WatchWindow1>
         <Ww>
           <count>0</count>
@@ -291,6 +274,16 @@
           <WinNumber>1</WinNumber>
           <ItemText>localtime</ItemText>
         </Ww>
+        <Ww>
+          <count>22</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>interrupt_triggered</ItemText>
+        </Ww>
+        <Ww>
+          <count>23</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>received</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>
@@ -330,7 +323,7 @@
         <periodic>1</periodic>
         <aLwin>1</aLwin>
         <aCover>0</aCover>
-        <aSer1>1</aSer1>
+        <aSer1>0</aSer1>
         <aSer2>0</aSer2>
         <aPa>0</aPa>
         <viewmode>1</viewmode>
@@ -358,7 +351,7 @@
 
   <Group>
     <GroupName>Drivers/STM32F0xx_HAL_Driver</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

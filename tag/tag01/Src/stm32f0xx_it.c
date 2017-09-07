@@ -48,6 +48,7 @@ extern usart_bitfield USART_STA;
 /* External variables --------------------------------------------------------*/
 extern TIM_HandleTypeDef htim14;
 extern TIM_HandleTypeDef htim16;
+static uint8 tim16_cnt=0;
 
 /* USER CODE END 0 */
 
@@ -153,8 +154,7 @@ void TIM16_IRQHandler(void)
 	 if(__HAL_TIM_GET_IT_SOURCE(&htim16, TIM_IT_UPDATE) !=RESET)
     {
       __HAL_TIM_CLEAR_IT(&htim16, TIM_IT_UPDATE);
-			
-			printf("nice0\r\n");
+			flag10s=1;
 			
     }
 
@@ -168,20 +168,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	char *p;
 	static uint16 cnt=0;
 	
-	localtime++;
-	startCnt++;
-	cnta++;
-	if(startCnt==1000)
-	{
-		startFlag=1;
-		startCnt=0;
-	}
-	
-	if(cnta==9300)
-	{
-		flag10s=1;
-//		cnta=0;
-	}
+	cnta=1;
 	
 	cnt++;
 	if(cnt==100){

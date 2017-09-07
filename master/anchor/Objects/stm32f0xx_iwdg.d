@@ -2,7 +2,7 @@
 .\objects\stm32f0xx_iwdg.o: .\FWlib\inc\stm32f0xx_iwdg.h
 .\objects\stm32f0xx_iwdg.o: .\SYSTEM\stm32f0xx.h
 .\objects\stm32f0xx_iwdg.o: .\CORE\core_cm0.h
-.\objects\stm32f0xx_iwdg.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\stm32f0xx_iwdg.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\stm32f0xx_iwdg.o: .\CORE\core_cmInstr.h
 .\objects\stm32f0xx_iwdg.o: .\CORE\core_cmFunc.h
 .\objects\stm32f0xx_iwdg.o: .\SYSTEM\system_stm32f0xx.h

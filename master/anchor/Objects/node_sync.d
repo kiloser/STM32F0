@@ -1,8 +1,8 @@
 .\objects\node_sync.o: USER\node_sync.c
-.\objects\node_sync.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\node_sync.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\math.h
+.\objects\node_sync.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\node_sync.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\node_sync.o: USER\node_sync.h
-.\objects\node_sync.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\node_sync.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\node_sync.o: USER\rf24l01.h
 .\objects\node_sync.o: .\FWlib\inc\stm32f0xx_exti.h
 .\objects\node_sync.o: .\SYSTEM\stm32f0xx.h
@@ -47,7 +47,7 @@
 .\objects\node_sync.o: .\HARDWARE\decadriver\deca_regs.h
 .\objects\node_sync.o: .\HARDWARE\decadriver\deca_version.h
 .\objects\node_sync.o: .\HARDWARE\decadriver\deca_device_api.h
-.\objects\node_sync.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\string.h
+.\objects\node_sync.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\node_sync.o: .\HARDWARE\Platform_deca\deca_callback.h
 .\objects\node_sync.o: .\HARDWARE\WDG\wdg.h
 .\objects\node_sync.o: .\USER\sys.h

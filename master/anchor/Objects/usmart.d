@@ -3,7 +3,7 @@
 .\objects\usmart.o: USER\Usmart\usmart_str.h
 .\objects\usmart.o: .\SYSTEM\stm32f0xx.h
 .\objects\usmart.o: .\CORE\core_cm0.h
-.\objects\usmart.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\usmart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\usmart.o: .\CORE\core_cmInstr.h
 .\objects\usmart.o: .\CORE\core_cmFunc.h
 .\objects\usmart.o: .\SYSTEM\system_stm32f0xx.h
@@ -42,9 +42,9 @@
 .\objects\usmart.o: .\HARDWARE\decadriver\deca_regs.h
 .\objects\usmart.o: .\HARDWARE\decadriver\deca_version.h
 .\objects\usmart.o: .\HARDWARE\decadriver\deca_device_api.h
-.\objects\usmart.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\string.h
+.\objects\usmart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\usmart.o: .\HARDWARE\Platform_deca\deca_callback.h
 .\objects\usmart.o: .\USER\rf24l01.h
 .\objects\usmart.o: .\USER\node_sync.h
-.\objects\usmart.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\usmart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\usmart.o: .\HARDWARE\WDG\wdg.h

@@ -2,7 +2,7 @@
 .\objects\main.o: USER\sys.h
 .\objects\main.o: .\SYSTEM\stm32f0xx.h
 .\objects\main.o: .\CORE\core_cm0.h
-.\objects\main.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\main.o: .\CORE\core_cmInstr.h
 .\objects\main.o: .\CORE\core_cmFunc.h
 .\objects\main.o: .\SYSTEM\system_stm32f0xx.h
@@ -42,10 +42,10 @@
 .\objects\main.o: .\HARDWARE\decadriver\deca_regs.h
 .\objects\main.o: .\HARDWARE\decadriver\deca_version.h
 .\objects\main.o: .\HARDWARE\decadriver\deca_device_api.h
-.\objects\main.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\string.h
+.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\main.o: .\HARDWARE\Platform_deca\deca_callback.h
 .\objects\main.o: USER\rf24l01.h
 .\objects\main.o: USER\node_sync.h
-.\objects\main.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\main.o: .\HARDWARE\WDG\wdg.h
 .\objects\main.o: USER\timer.h

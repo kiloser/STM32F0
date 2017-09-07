@@ -51,22 +51,26 @@ compiling stm32f0xx_it.c...
   #endif
 ../Src/stm32f0xx_it.c(168): warning:  #177-D: variable "p" was declared but never referenced
         char *p;
-../Src/stm32f0xx_it.c: 2 warnings, 0 errors
+../Src/stm32f0xx_it.c(51): warning:  #177-D: variable "tim16_cnt" was declared but never referenced
+  static uint8 tim16_cnt=0;
+../Src/stm32f0xx_it.c: 3 warnings, 0 errors
 compiling stm32f0xx_hal_msp.c...
 compiling main.c...
 ..\Drivers\Hardware\USART\USART.h(17): warning:  #1-D: last line of file ends without a newline
   #endif
-../Src/main.c(344): warning:  #1293-D: assignment in condition
+../Src/main.c(347): warning:  #1293-D: assignment in condition
                                                 while (!(status_reg=dwt_read32bitreg(SYS_STATUS_ID) & SYS_STATUS_TXFRS))
-../Src/main.c(358): warning:  #1293-D: assignment in condition
+../Src/main.c(361): warning:  #1293-D: assignment in condition
                                                 while (!(status_reg=dwt_read32bitreg(SYS_STATUS_ID) & SYS_STATUS_TXFRS))
+../Src/main.c(47): warning:  #177-D: variable "tag_delay" was declared but never referenced
+  static uint16 tag_delay=450;
 ../Src/main.c(55): warning:  #550-D: variable "status_reg" was set but never used
   static uint32 status_reg = 0; 
-../Src/main.c(78): warning:  #177-D: variable "online_tx_ts" was declared but never referenced
+../Src/main.c(79): warning:  #177-D: variable "online_tx_ts" was declared but never referenced
   static uint64 online_tx_ts;
-../Src/main.c(79): warning:  #177-D: variable "tag_order" was declared but never referenced
+../Src/main.c(80): warning:  #177-D: variable "tag_order" was declared but never referenced
   static uint32 tag_order=1;
-../Src/main.c: 6 warnings, 0 errors
+../Src/main.c: 7 warnings, 0 errors
 compiling Testing.c...
 ..\Drivers\Hardware\USART\USART.h(17): warning:  #1-D: last line of file ends without a newline
   #endif
@@ -106,8 +110,8 @@ compiling usmart_config.c...
 ..\Drivers\Hardware\USAMRT\usmart_config.c: 1 warning, 0 errors
 compiling usmart_str.c...
 linking...
-Program Size: Code=23404 RO-data=584 RW-data=476 ZI-data=2140  
-"f072cbt6\f072cbt6.axf" - 0 Error(s), 18 Warning(s).
+Program Size: Code=23376 RO-data=584 RW-data=484 ZI-data=2140  
+"f072cbt6\f072cbt6.axf" - 0 Error(s), 20 Warning(s).
 
 <h2>Software Packages used:</h2>
 

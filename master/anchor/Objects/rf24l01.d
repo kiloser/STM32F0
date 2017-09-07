@@ -1,6 +1,6 @@
 .\objects\rf24l01.o: USER\rf24l01.c
 .\objects\rf24l01.o: USER\rf24l01.h
-.\objects\rf24l01.o: D:\keilmdk\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\rf24l01.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\rf24l01.o: .\FWlib\inc\stm32f0xx_exti.h
 .\objects\rf24l01.o: .\SYSTEM\stm32f0xx.h
 .\objects\rf24l01.o: .\CORE\core_cm0.h

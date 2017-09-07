@@ -83,12 +83,12 @@
         <Book>
           <Number>0</Number>
           <Title>Data Brief (STM32F072-Discovery)</Title>
-          <Path>D:\keilmdk\ARM\PACK\Keil\STM32F0xx_DFP\1.5.0\Boards/ST/STM32F072-Discovery/Documents/DM00099403.pdf</Path>
+          <Path>D:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\1.5.0\Boards/ST/STM32F072-Discovery/Documents/DM00099403.pdf</Path>
         </Book>
         <Book>
           <Number>1</Number>
           <Title>Schematics (STM32F072-Discovery)</Title>
-          <Path>D:\keilmdk\ARM\PACK\Keil\STM32F0xx_DFP\1.5.0\Boards/ST/STM32F072-Discovery/Documents/MB1076.pdf</Path>
+          <Path>D:\Keil_v5\ARM\PACK\Keil\STM32F0xx_DFP\1.5.0\Boards/ST/STM32F072-Discovery/Documents/MB1076.pdf</Path>
         </Book>
         <Book>
           <Number>2</Number>
