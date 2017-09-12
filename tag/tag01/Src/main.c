@@ -43,7 +43,7 @@ static void MX_SPI1_Init(void);
 static void MX_TIM14_Init(void);
 static void MX_TIM16_Init(void);
 
-static uint8 tag_id[2] ={0x00,0x03};
+static uint8 tag_id[2] ={0x00,0x01};
 static uint16 tag_delay=450;
 static uint8 tx_poll_msg[] = {0x26, 0x17, 0x26, 0x16, 0x33, 0, 0, 0, 0, 0};
 static uint8 rx_resp_msg[] = {0x26, 0x17, 0x26, 0x16, 0x44, 0, 0, 0, 0, 0, 0, 0};

@@ -185,8 +185,9 @@ int main(void)
 	stat = decamutexon() ;
 	dwt_configure(&config);
 	printf("dwconfig_OK\r\n");
-//	//初始化看门狗，分频系数为64，重载值为1250，溢出时间为2s
+	//初始化看门狗，分频系数为64，重载值为1250，溢出时间为2s
 //	IWDG_Init(4,12500);
+	
 	
 	dwt_setleds(DWT_LEDS_ENABLE);
 	decamutexoff(stat) ;
@@ -209,7 +210,7 @@ int main(void)
 				dwt_setrxtimeout(0);
 				/* Activate reception immediately. */
 				dwt_rxenable(DWT_START_RX_IMMEDIATE);
-//				IWDG_Feed();
+				IWDG_Feed();
 			  
 				/* Poll for reception of a frame or error/timeout. See NOTE 7 below. */
 				while (!interrupt_triggered)
@@ -459,7 +460,7 @@ void send_sync(void)
 
 void EXTI4_15_IRQHandler(void)
 {
-	
+	IWDG_Init(6,2500);
 	
 	if(EXTI_GetITStatus(EXTI_Line12))
 	{
@@ -474,6 +475,7 @@ void EXTI4_15_IRQHandler(void)
 			RF_timeout++;
 		dwt_write32bitreg(SYS_STATUS_ID, status_reg);
 	}
+	IWDG_Feed();
 }
 
 void TIM3_IRQHandler(void)
