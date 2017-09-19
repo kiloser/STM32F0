@@ -185,6 +185,8 @@ int main(void)
 	stat = decamutexon() ;
 	dwt_configure(&config);
 	printf("dwconfig_OK\r\n");
+	//初始化看门狗，分频系数为64，重载值为1250，溢出时间为2s
+//	IWDG_Init(4,12500);
 	
 	
 	dwt_setleds(DWT_LEDS_ENABLE);
@@ -208,7 +210,7 @@ int main(void)
 				dwt_setrxtimeout(0);
 				/* Activate reception immediately. */
 				dwt_rxenable(DWT_START_RX_IMMEDIATE);
-//				IWDG_Feed();
+				IWDG_Feed();
 			  
 				/* Poll for reception of a frame or error/timeout. See NOTE 7 below. */
 				while (!interrupt_triggered)
@@ -331,7 +333,7 @@ int main(void)
 																if(distance<0)
 																	distance=-distance;
 																/* Display */
-																
+																printf("tag_id:%d \t %d \r\n",tag_id[1],msec);
 																while(SEND_ORDER==1)
 																{
 																	
@@ -354,6 +356,7 @@ int main(void)
 																		{																			
 																			memcpy(&distance_recv[received_numble],&rx_buffer[REPORT_MSG_ID_IDX+ID_LEN],sizeof(double));
 																			memcpy(&id_buff[received_numble][0],&rx_buffer[REPORT_MSG_ID_IDX],ID_LEN);
+																			
 																			//printf("DIST from %x%x is:%3.2f m\r\n",rx_buffer[8],rx_buffer[9],distance_recv[received_numble]);
 																			received_numble++;						
 																		}																	
@@ -451,15 +454,14 @@ void send_sync(void)
 	dwt_starttx(DWT_START_TX_IMMEDIATE);
 	while (!(dwt_read32bitreg(SYS_STATUS_ID) & SYS_STATUS_TXFRS));
 	dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_TXFRS);
-	printf("send_sync \t %d \r\n",msec);
+//	printf("send_sync \t %d \r\n",msec);
 }
 
 
 void EXTI4_15_IRQHandler(void)
 {
+	IWDG_Init(6,2500);
 	
-//	//初始化看门狗，分频系数为64，重载值为1250，溢出时间为2s
-//			IWDG_Init(4,5000);
 	if(EXTI_GetITStatus(EXTI_Line12))
 	{
 		EXTI_ClearITPendingBit(EXTI_Line12);
@@ -473,6 +475,7 @@ void EXTI4_15_IRQHandler(void)
 			RF_timeout++;
 		dwt_write32bitreg(SYS_STATUS_ID, status_reg);
 	}
+	IWDG_Feed();
 }
 
 void TIM3_IRQHandler(void)
@@ -536,9 +539,9 @@ void send_to_PC(void)
 	for(i=0;i<20;i++)
 	{
 	while(USART_GetFlagStatus(USART1,USART_FLAG_TC)==RESET); 
-   USART_SendData(USART1,(uint8_t)send_pc[i]);
+//   USART_SendData(USART1,(uint8_t)send_pc[i]);
 	}
-	printf("tag_id:%d \t %d \r\n",tag_id[1],msec);
+//	printf("tag_id:%d \t %d \r\n",tag_id[1],msec);
 }
 
 void set_fre(void)
@@ -742,7 +745,7 @@ void send_to_PC_none(void)
 	for(i=0;i<20;i++)
 	{
 	while(USART_GetFlagStatus(USART1,USART_FLAG_TC)==RESET); 
-   USART_SendData(USART1,(uint8_t)send_pc[i]);
+//   USART_SendData(USART1,(uint8_t)send_pc[i]);
 	}
 //	printf("tag_id:%d \t %d \r\n",tag_id[1],msec);
 }

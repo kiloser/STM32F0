@@ -102,7 +102,6 @@ char newdata=0;
 
 /* USER CODE END PFP */
 
-/* USER CODE BEGIN 0 */
 
 
 /* USER CODE END 0 */
@@ -189,7 +188,7 @@ lab:		dwt_forcetrxoff();
 			while(1)
 			{
 						
-						printf("enter waiting :\t %ld\r\n",localtime);
+//						printf("enter waiting :\t %ld\r\n",localtime);
 						while(!interrupt_triggered);
 						interrupt_triggered=0;
 						received=0;
@@ -209,7 +208,7 @@ lab:		dwt_forcetrxoff();
 								acTime+=(uint32)(rx_buffer[8]<<24);
 							  
 								HAL_Delay(1000-acTime%1000);
-								HAL_Delay(100*tag_id[1]);
+								HAL_Delay(150*(tag_id[1]-1)+10);
 								
 							  HAL_TIM_Base_Start_IT(&htim14);
 								HAL_TIM_Base_Start_IT(&htim16);
@@ -368,12 +367,16 @@ lab:		dwt_forcetrxoff();
 				
 				
 				
-				printf("time :\t %ld\r\n",localtime);
-				if(cntx==9)
+				
+//				printf("time :\t %ld\r\n",localtime);
+				if(cntx==3)
 				{		
 					while(!flag10s);
 					flag10s=0;
-
+					
+//					HAL_TIM_Base_Stop_IT(&htim16);
+//					TIM16->CNT=0;
+					
 					dwt_setrxtimeout(0);
 					goto lab;
 				}
@@ -381,9 +384,9 @@ lab:		dwt_forcetrxoff();
 				{
 					dwt_entersleep();
 				}
-				
 				while(!cnta);
 				cnta=0;
+				
 					
 			//	dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_SLP2INIT);
 	}
@@ -605,7 +608,7 @@ static void MX_TIM16_Init(void)
   htim16.Instance = TIM16;
   htim16.Init.Prescaler = 47990;
   htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim16.Init.Period = 9900;//9.9s中断一次
+  htim16.Init.Period = 3000;//5s中断一次
   htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   if (HAL_TIM_Base_Init(&htim16) != HAL_OK)
   {
