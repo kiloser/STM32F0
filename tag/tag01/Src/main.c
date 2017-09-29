@@ -43,17 +43,21 @@ static void MX_SPI1_Init(void);
 static void MX_TIM14_Init(void);
 static void MX_TIM16_Init(void);
 
-static uint8 tag_id[2] ={0x00,0x04};
+static uint32 len;
+static uint8 tag_id[2] ={0x00,0x02};
+static uint8 tx_frame_acked = 0;//自动应答响应标志位 1收到 0未收到
+static uint8 issync=0;//同步时间戳标志位 1收到 0未收到
 static uint16 tag_delay=450;
 static uint8 tx_poll_msg[] = {0x26, 0x17, 0x26, 0x16, 0x33, 0, 0, 0, 0, 0};
 static uint8 rx_resp_msg[] = {0x26, 0x17, 0x26, 0x16, 0x44, 0, 0, 0, 0, 0, 0, 0};
 static uint8 tx_final_msg[] = {0x26, 0x17, 0x26, 0x16, 0x55, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 static uint8 tx_tell_msg[] = {0x26, 0x17, 0x26, 0x16, 0x66, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
+static uint8 poll_time_msg[] = {0x26,0x17,0x26,0x16,0x99,0,0,0,0,0,0,0,0,0};
 static uint8 rx_buffer[RX_BUF_LEN];
 static uint32 status_reg = 0;	
-	
+
+static uint8 send_count=0;
 static uint8 final_ok =0;
 static uint8 interrupt_triggered =0;
 static uint8 received =0;		
@@ -92,6 +96,8 @@ static uint64 get_tx_timestamp_u64(void);
 static uint64 get_rx_timestamp_u64(void);
 static void final_msg_set_ts(uint8 *ts_field, uint64 ts);
 void dw_setARER(int);
+void Frame_Ack(void);
+void POLL_TimeWindow(void);
 
 usart_bitfield USART_STA={
 	0,
@@ -178,58 +184,9 @@ int main(void)
 				dwt_setrxtimeout(0);
 				dwt_setinterrupt( DWT_INT_RFTO | DWT_INT_RFCG, 1);
 				/* Activate reception immediately. */
-lab:		dwt_forcetrxoff();
-				dwt_setleds(DWT_LEDS_ENABLE);
-				dwt_rxenable(DWT_START_RX_IMMEDIATE);
+lab:    POLL_TimeWindow();
 			
-			
-			
-  
-			while(1)
-			{
-						
-//						printf("enter waiting :\t %ld\r\n",localtime);
-						while(!interrupt_triggered);
-						interrupt_triggered=0;
-						received=0;
-						/* A frame has been received, read it into the local buffer. */
-						start_frame_len = dwt_read32bitreg(RX_FINFO_ID) & RX_FINFO_RXFLEN_MASK;
-						if (start_frame_len <= RX_BUF_LEN)
-						{
-							dwt_readrxdata(rx_buffer, start_frame_len, 0);
-						}
-				
-							if(rx_buffer[0]==0x26&rx_buffer[1]==0x17&rx_buffer[4]==0x88)
-							{
-								acTime=0;
-								acTime=rx_buffer[5];
-								acTime+=(uint32)(rx_buffer[6]<<8);
-								acTime+=(uint32)(rx_buffer[7]<<16);
-								acTime+=(uint32)(rx_buffer[8]<<24);
-							  
-								HAL_Delay(1000-acTime%1000);
-								HAL_Delay(150*(tag_id[1]-1)+10);
-								
-							  HAL_TIM_Base_Start_IT(&htim14);
-								HAL_TIM_Base_Start_IT(&htim16);
-								
-								
-								cntx=0;
-								break;
-						
-							}
-							else
-							{
-								/* Activate reception immediately. */
-								dwt_rxenable(DWT_START_RX_IMMEDIATE);
-							}
-						
-			}
-			
-			
-			
-			
-	dwt_configuresleep(DWT_PRESRV_SLEEP | DWT_CONFIG, DWT_WAKE_CS |DWT_WAKE_WK| DWT_SLP_EN);
+		dwt_configuresleep(DWT_PRESRV_SLEEP | DWT_CONFIG, DWT_WAKE_CS |DWT_WAKE_WK| DWT_SLP_EN);
 	/**************************************************/		
 	
 	while (1)
@@ -277,7 +234,7 @@ lab:		dwt_forcetrxoff();
 			dwt_configuresleep(DWT_PRESRV_SLEEP | DWT_CONFIG, DWT_WAKE_SLPCNT | DWT_SLP_EN);
 		
 		
-		/* USER CODE BEGIN 2 */	
+			/* USER CODE BEGIN 2 */	
 			HAL_Delay(5);
 			/* Write frame data to DW1000 and prepare transmission. See NOTE 7 below. */
 			dwt_writetxdata(sizeof(tx_poll_msg), tx_poll_msg, 0);
@@ -369,13 +326,10 @@ lab:		dwt_forcetrxoff();
 				
 				
 //				printf("time :\t %ld\r\n",localtime);
-				if(cntx==3)
+				if(cntx==10)
 				{		
-					while(!flag10s);
-					flag10s=0;
-					
-//					HAL_TIM_Base_Stop_IT(&htim16);
-//					TIM16->CNT=0;
+//					while(!flag10s);
+//					flag10s=0;
 					
 					dwt_setrxtimeout(0);
 					goto lab;
@@ -404,6 +358,7 @@ void EXTI2_3_IRQHandler(void)
 	if(status&SYS_STATUS_RXFCG)
 	{
 		received=1;
+		Frame_Ack();
 	}
 	else if(status & SYS_STATUS_RXRFTO)
 			RF_timeout++;
@@ -416,6 +371,96 @@ void EXTI2_3_IRQHandler(void)
 
 
 
+void Frame_Ack(void)
+{
+	
+						/* A frame has been received, read it into the local buffer. */
+							len = dwt_read32bitreg(RX_FINFO_ID) & RX_FINFO_RXFLEN_MASK;
+							if (len <= RX_BUF_LEN)
+							{
+									dwt_readrxdata(rx_buffer, len, 0);
+							}
+
+							/* Check that the frame is the expected response from the companion "DS TWR responder" example.
+							 * As the sequence number field of the frame is not relevant, it is cleared to simplify the validation of the frame. */
+							if (rx_buffer[0]==0x26&rx_buffer[1]==0x17&rx_buffer[4]==0x88)
+							{
+									tx_frame_acked=1;
+							}
+}
+/*! ------------------------------------------------------------------------------------------------------------------
+ * @fn POLL_TimeWindow()
+ *
+ * @brief send poll message to main anchor 
+ *  
+ *
+ * @param  none
+ *
+ * @return  none
+ */
+
+void POLL_TimeWindow(void)
+{
+	dwt_write32bitreg(SYS_STATUS_ID,SYS_STATUS_TXFRS|SYS_STATUS_RXFCG|SYS_STATUS_SLP2INIT);//清除标志位
+	dwt_setinterrupt(DWT_INT_TFRS|DWT_INT_RFCG|DWT_INT_RFTO,1);//开启中断
+	dwt_setrxtimeout(500);//设置接受超时
+	dwt_setrxaftertxdelay(0);
+	dw_setARER(1);//使能接收机自动重启
+	dwt_writetxdata(sizeof(poll_time_msg), poll_time_msg, 0);
+	dwt_writetxfctrl(sizeof(poll_time_msg), 0, 0);
+	
+	do
+	{
+		dwt_starttx(DWT_START_TX_IMMEDIATE|DWT_RESPONSE_EXPECTED);
+		dwt_setrxtimeout(TIME_OUT_UUS);
+		dwt_rxenable(0);
+		while(!tx_frame_acked)
+		{
+			Delay_ms(20);//如果發送太快太瘋狂，會對基站造成擁堵
+			dwt_starttx(DWT_START_TX_IMMEDIATE|DWT_RESPONSE_EXPECTED);
+			dwt_setrxtimeout(TIME_OUT_UUS);
+			dwt_rxenable(0);
+			send_count++;
+		}
+		if(tx_frame_acked)
+		{
+						interrupt_triggered=0;
+						received=0;
+						/* A frame has been received, read it into the local buffer. */
+						start_frame_len = dwt_read32bitreg(RX_FINFO_ID) & RX_FINFO_RXFLEN_MASK;
+						if (start_frame_len <= RX_BUF_LEN)
+						{
+							dwt_readrxdata(rx_buffer, start_frame_len, 0);
+						}
+				
+							if(rx_buffer[0]==0x26&rx_buffer[1]==0x17&rx_buffer[4]==0x88)
+							{
+								
+								tx_frame_acked=0;
+								acTime=0;
+								acTime=rx_buffer[5];
+								acTime+=(uint32)(rx_buffer[6]<<8);
+								acTime+=(uint32)(rx_buffer[7]<<16);
+								acTime+=(uint32)(rx_buffer[8]<<24);
+							  
+								HAL_Delay(1000-acTime%1000);
+								HAL_Delay(150*(tag_id[1]-1)+10);
+								
+							  HAL_TIM_Base_Start_IT(&htim14);
+								HAL_TIM_Base_Start_IT(&htim16);
+								
+								issync=1;
+						
+							}
+							else
+							{
+								/* Activate reception immediately. */
+								dwt_rxenable(DWT_START_RX_IMMEDIATE);
+							}
+		}
+	}
+	while(!issync);
+}
 
 
 
@@ -608,7 +653,7 @@ static void MX_TIM16_Init(void)
   htim16.Instance = TIM16;
   htim16.Init.Prescaler = 47990;
   htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim16.Init.Period = 3000;//5s中断一次
+  htim16.Init.Period = 5000;//5s中断一次
   htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   if (HAL_TIM_Base_Init(&htim16) != HAL_OK)
   {

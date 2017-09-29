@@ -21,6 +21,8 @@ static dwt_config_t config = {
 
 #define SEND_ORDER 1 //max 3
 /* Frames used in the ranging process. See NOTE 2 below. */
+
+static uint8 poll_time_msg[]={0x26,0x17,0x26,0x16,0x99};
 static uint8 rx_poll_msg[] = {0x26, 0x17, 0x26, 0x16, 0x33, 0, 0, 0, 0, 0};
 static uint8 tx_resp_msg[] = {0x26, 0x17, 0x26, 0x16, 0x44, 0, 0, 0, 0x38,SEND_ORDER,0, 0};//anchor ID here
 static uint8 rx_final_msg[] = {0x26, 0x17, 0x26, 0x16, 0x55,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -123,10 +125,10 @@ int main(void)
 	SystemInit();
 	LED_Init();
 	delay_init();
-	//开启TIM3中断
-	timer_init();
+//	//开启TIM3中断
+//	timer_init();
   USART_Config();
-//	function_scan();
+	//	function_scan();
 	usmart_dev.init(48);
 	
 	
@@ -411,6 +413,18 @@ int main(void)
 								}
 									
 						}
+						
+						//收到标签查询信号就发送时间戳
+						if(memcmp(rx_buffer,poll_time_msg,ALL_MSG_COMMON_LEN)==0)
+						{
+							    TIM_ClearITPendingBit(TIM3,TIM_IT_CC3);
+									dwt_forcetrxoff();
+									send_sync();	
+									dwt_setrxtimeout(0);
+									/* Activate reception immediately. */
+									dwt_rxenable(DWT_START_RX_IMMEDIATE);
+						}
+				
 				}
 				
 			  
@@ -473,22 +487,22 @@ void EXTI4_15_IRQHandler(void)
 		}
 		else if(status_reg & SYS_STATUS_RXRFTO)
 			RF_timeout++;
-		dwt_write32bitreg(SYS_STATUS_ID, status_reg);
+			dwt_write32bitreg(SYS_STATUS_ID, status_reg);
 	}
 	IWDG_Feed();
 }
 
-void TIM3_IRQHandler(void)
-{
-  if (TIM_GetITStatus(TIM3, TIM_IT_CC3)!= RESET)
-  {
-    TIM_ClearITPendingBit(TIM3,TIM_IT_CC3);
-		dwt_forcetrxoff();
-		send_sync();	
-		dwt_setrxtimeout(0);
-		dwt_rxenable(0);
-  }
-}
+//void TIM3_IRQHandler(void)
+//{
+//  if (TIM_GetITStatus(TIM3, TIM_IT_CC3)!= RESET)
+//  {
+//    TIM_ClearITPendingBit(TIM3,TIM_IT_CC3);
+//		dwt_forcetrxoff();
+//		send_sync();	
+//		dwt_setrxtimeout(0);
+//		dwt_rxenable(0);
+//  }
+//}
 
 void send_to_PC(void)
 {
