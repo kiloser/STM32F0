@@ -69,10 +69,12 @@ uint16 startCnt=0;
 uint16 cnta=0;
 uint8_t usart_rx_buff[64];//串口buff
 uint32 startTime=1;
-
+uint8 syncCnt=0;
 uint8 startFlag=0;
 uint8 flag10s=0;
-uint8 cntx=0;
+uint16 cntx=0;
+
+
 
 typedef unsigned long long uint64;
 static uint64 poll_tx_ts;
@@ -162,8 +164,8 @@ int main(void)
 	memcpy(&tx_final_msg[TAG_ID_IDX],tag_id,ID_LEN);
 	memcpy(&tx_tell_msg[TAG_ID_IDX],tag_id,ID_LEN);
 	reset_DW1000();
-	
-	
+	HAL_TIM_Base_Start_IT(&htim14);
+	HAL_TIM_Base_Start_IT(&htim16);
 	/**************************************************/
 	/*change*/
 	dwt_spicswakeup(dummy_buffer, DUMMY_BUFFER_LEN);
@@ -184,12 +186,33 @@ int main(void)
 				dwt_setrxtimeout(0);
 				dwt_setinterrupt( DWT_INT_RFTO | DWT_INT_RFCG, 1);
 				/* Activate reception immediately. */
-lab:    POLL_TimeWindow();
-			
-		dwt_configuresleep(DWT_PRESRV_SLEEP | DWT_CONFIG, DWT_WAKE_CS |DWT_WAKE_WK| DWT_SLP_EN);
+		
 	/**************************************************/		
 	
-	while (1)
+while(1)
+{
+		dwt_configure(&config);
+		/* Clear reception timeout to start next ranging process. */
+		dw_setARER(1);			
+		dwt_rxreset();
+		dwt_setrxantennadelay(RX_ANT_DLY);
+		dwt_settxantennadelay(TX_ANT_DLY);
+		dwt_setleds(DWT_LEDS_ENABLE);
+		dwt_setrxtimeout(0);
+		dwt_setinterrupt( DWT_INT_RFTO | DWT_INT_RFCG, 1);
+	
+	
+		HAL_TIM_Base_Stop_IT(&htim16);
+		//向基站查询时间戳
+		POLL_TimeWindow();
+		HAL_Delay(1000-localtime%1000);
+		HAL_Delay(150*(tag_id[1]-1)+10);
+		htim16.Instance->CNT=0;
+		flag10s=0;
+		syncCnt++;
+		HAL_TIM_Base_Start_IT(&htim16);
+		dwt_configuresleep(DWT_PRESRV_SLEEP | DWT_CONFIG, DWT_WAKE_CS |DWT_WAKE_WK| DWT_SLP_EN);
+		while (1)
 	{
 		while(dwt_spicswakeup(dummy_buffer, DUMMY_BUFFER_LEN)!=DWT_SUCCESS);
 		wearing=0;
@@ -326,26 +349,25 @@ lab:    POLL_TimeWindow();
 				
 				
 //				printf("time :\t %ld\r\n",localtime);
-				if(cntx==10)
+				if((cntx&0x0f)==0)
 				{		
-//					while(!flag10s);
-//					flag10s=0;
+					break;
 					
-					dwt_setrxtimeout(0);
-					goto lab;
 				}
 				else
 				{
 					dwt_entersleep();
 				}
-				while(!cnta);
-				cnta=0;
+				while(flag10s==0);
+				flag10s=0;
 				
 					
 			//	dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_SLP2INIT);
 	}
 	
 
+
+}
 }
 
 
@@ -401,6 +423,7 @@ void Frame_Ack(void)
 
 void POLL_TimeWindow(void)
 {
+	uint32 time=0;
 	dwt_write32bitreg(SYS_STATUS_ID,SYS_STATUS_TXFRS|SYS_STATUS_RXFCG|SYS_STATUS_SLP2INIT);//清除标志位
 	dwt_setinterrupt(DWT_INT_TFRS|DWT_INT_RFCG|DWT_INT_RFTO,1);//开启中断
 	dwt_setrxtimeout(500);//设置接受超时
@@ -411,6 +434,7 @@ void POLL_TimeWindow(void)
 	
 	do
 	{
+		
 		dwt_starttx(DWT_START_TX_IMMEDIATE|DWT_RESPONSE_EXPECTED);
 		dwt_setrxtimeout(TIME_OUT_UUS);
 		dwt_rxenable(0);
@@ -422,7 +446,10 @@ void POLL_TimeWindow(void)
 			dwt_rxenable(0);
 			send_count++;
 		}
-		if(tx_frame_acked)
+		
+		time=localtime;
+		acTime=0;
+			if(tx_frame_acked)
 		{
 						interrupt_triggered=0;
 						received=0;
@@ -437,18 +464,12 @@ void POLL_TimeWindow(void)
 							{
 								
 								tx_frame_acked=0;
-								acTime=0;
 								acTime=rx_buffer[5];
 								acTime+=(uint32)(rx_buffer[6]<<8);
 								acTime+=(uint32)(rx_buffer[7]<<16);
 								acTime+=(uint32)(rx_buffer[8]<<24);
-							  
-								HAL_Delay(1000-acTime%1000);
-								HAL_Delay(150*(tag_id[1]-1)+10);
-								
-							  HAL_TIM_Base_Start_IT(&htim14);
-								HAL_TIM_Base_Start_IT(&htim16);
-								
+//								HAL_TIM_Base_Start_IT(&htim16);
+								localtime=acTime;
 								issync=1;
 						
 							}
@@ -458,8 +479,14 @@ void POLL_TimeWindow(void)
 								dwt_rxenable(DWT_START_RX_IMMEDIATE);
 							}
 		}
+	
+		
+	dwt_forcetrxoff();
 	}
 	while(!issync);
+	issync=0;
+	dwt_setinterrupt(DWT_INT_TFRS|DWT_INT_RFCG|DWT_INT_RFTO,0);//關中断
+	dwt_setrxtimeout(0);
 }
 
 
@@ -638,7 +665,7 @@ static void MX_TIM14_Init(void)
   htim14.Instance = TIM14;
   htim14.Init.Prescaler = 4799;
   htim14.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim14.Init.Period = 10000;//1ms 中断一次
+  htim14.Init.Period = 10;//1ms 中断一次
   htim14.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   if (HAL_TIM_Base_Init(&htim14) != HAL_OK)
   {
@@ -651,9 +678,9 @@ static void MX_TIM16_Init(void)
 {
 
   htim16.Instance = TIM16;
-  htim16.Init.Prescaler = 47990;
+  htim16.Init.Prescaler = 4799;
   htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim16.Init.Period = 5000;//5s中断一次
+  htim16.Init.Period = 10000;//1s中断一次
   htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   if (HAL_TIM_Base_Init(&htim16) != HAL_OK)
   {

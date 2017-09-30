@@ -155,7 +155,6 @@ void TIM16_IRQHandler(void)
     {
       __HAL_TIM_CLEAR_IT(&htim16, TIM_IT_UPDATE);
 			flag10s=1;
-			
     }
 
 }
@@ -167,7 +166,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	char *p;
 	static uint16 cnt=0;
-	
+	localtime++;
 	cnta=1;
 	
 	cnt++;
